@@ -11,11 +11,11 @@ trigger:
 pool:
   name: Demo
 
-variables:
-  buildConfiguration: 'Release'
-  dotNetFramework: 'net6.0'
-  dotNetVersion: '6.0.300'
-  targetRuntime: 'linux-x64'
+  variables:
+    buildConfiguration: 'Release'
+    dotNetFramework: 'net6.0'
+    dotNetVersion: '6.0.300'
+    targetRuntime: 'linux-x64'
 
 stages:
 - stage: 'Build'

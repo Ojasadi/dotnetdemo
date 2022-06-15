@@ -37,7 +37,7 @@ stages:
       inputs:
         command: 'custom'
         workingDir: 'ClientApp'
-        customCommand: 'run test'
+        customCommand: 'run test --watch=false'
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
