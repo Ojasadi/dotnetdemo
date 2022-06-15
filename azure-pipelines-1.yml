@@ -11,11 +11,40 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  dotNetFramework: 'net6.0'
+  dotNetVersion: '6.0.300'
+  targetRuntime: 'linux-x64'
 
-steps:
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+stages:
+- stage: 'Build'
+  jobs:
+  - job: 'Build'
+    steps:
+    - script: dotnet build --configuration $(buildConfiguration)
+      displayName: 'dotnet build $(buildConfiguration)'
+      
+    - script: dotnet publish --configuration $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)
+      displayName: 'publishing'
+    
+    - task: Npm@1
+      displayName: 'Install Dependency'
+      inputs:
+       command: 'install'
+       workingDir: 'ClientApp'
 
+    - task: Npm@1
+      displayName: 'testing'
+      inputs:
+        command: 'custom'
+        workingDir: 'ClientApp'
+        customCommand: 'run test'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
+       
+      
 #- task: DotNetCoreCLI@2
 #  displayName: Publish Project
 #  inputs:
