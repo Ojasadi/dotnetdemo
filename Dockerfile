@@ -25,4 +25,4 @@ ENV ASPNETCORE_URLS http://*:5000
 WORKDIR /app
 COPY --from=publish /app/publish .
 EXPOSE 5000
-ENTRYPOINT ["dotnet", "DotNet.Docker.dll"]
+ENTRYPOINT ["dotnet", "dotNet6.dll"]
