@@ -9,7 +9,7 @@ trigger:
 - master
 
 pool:
-  name: Batch_devops
+  name: DockerDemo
 
 variables:
   buildConfiguration: 'Release'
